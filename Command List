@@ -1,0 +1,345 @@
+Lab Journal
+
+
+Gabriel Fleury
+
+
+PowerShell COSC-2101-07
+
+ 
+
+
+
+
+
+
+
+Command Types and Names	Page Number
+Get-help, import-csv	3
+Out-file, get-content	4
+Get-service, select-object 	5
+Get-process, get-module	6
+New-PSSession, Invoke-Command	7
+Get-CimClass, Get-WmiObject	8
+Clear-Host, Set-Location 	9
+New-Variable, New-Item	10
+New-NetIPAddress, Install-Windowsfeature	11
+New-ADUser	12
+Set-DnsClientServerAddress, Add-Computer	13
+Write-Host, Rename-Computer, Set-Timezone	14
+New-SmbShare, Remove-ADUser	15
+Set-ExecutionPolicy, Get-EventLog	16
+Stop-Process, Get-NetAdapter	17
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.	
+Cmdlet Name	Description	Syntax	Example 
+Get-help	Provides information about powershell commands and concepts 	Get-help cmdlet	Get-help set-executionpolicy
+ 
+2.	
+Cmdlet Name	Description	Syntax	Example 
+Import-CSV	Used to read csv file data and convert into objects	Import-Csv [-Path] <String> [-Delimiter <Char>] [-Header <String[]>] [-Encoding <Encoding>] [<CommonParameters>]	$users = Import-Csv -Path "C:\path\to\users.csv"
+
+
+
+
+
+
+3.	 
+
+Cmdlet Name	Description	Syntax	Example 
+Out-file	Used to send output to a file 	Out-File [-FilePath] <String> [-Append] [-Encoding <Encoding>] [-Width <Int32>] [<CommonParameters>]	Get-Process | Out-File -FilePath "C:\path\to\processes.txt"
+
+
+
+
+
+
+
+
+4.	 
+Cmdlet Name	Description	Syntax	Example 
+Get-content	Retrieves file content and displays in plain text	Get-Content [-Path] <String> [-Encoding <Encoding>] [-TotalCount <Int32>] [-Tail <Int32>] [-ReadCount <Int32>] [-Raw] [<CommonParameters>]	Get-Content -Path "C:\path\to\example.txt"
+
+
+
+
+
+
+
+
+
+
+
+
+5.	
+Cmdlet Name	Description	Syntax	Example 
+Get-service	Gets information about a service. Things like name and status	Get-Service [[-Name] <String[]>] [-ComputerName <String>] [-DependentServices] [-RequiredServices] [<CommonParameters>]	Get-Service -Name "Spooler"
+
+
+
+
+
+
+
+
+
+
+
+6.	 
+Cmdlet Name	Description	Syntax	Example 
+Select-object	Versatile. Used to select object properties, create new ones or limit objects.	Select-Object [-Property] <Object[]> [-ExcludeProperty <String[]>] [-ExpandProperty <String>] [-First <Int32>] [-Last <Int32>] [-Unique] [-InputObject <PSObject>] [<CommonParameters>]	Get-Service | Select-Object -Property Name, Status
+
+
+
+
+
+
+
+
+
+7.	 
+Cmdlet Name	Description	Syntax	Example 
+Get-process	Gets information about running processes on your computer.	Get-Process [[-Name] <String[]>] [-ComputerName <String[]>] [-Id <Int32[]>] [-FileVersionInfo] [-Module] [-IncludeUserName] [<CommonParameters>]	Get-Process -Name notepad
+
+
+
+
+
+
+
+
+
+
+8.	 
+Cmdlet Name	Description	Syntax	Example 
+Get-module	Displays all modules currently loaded in the session	Get-Module [[-Name] <String[]>] [-FullyQualifiedName <ModuleSpecification[]>] [<CommonParameters>]
+Get-Module [-ListAvailable] [[-Name] <String[]>] [-FullyQualifiedName <ModuleSpecification[]>] [-All] [<CommonParameters>]	Get-Module -Name Azure -ListAvailable -All
+
+
+
+
+
+
+
+9.	
+Cmdlet Name	Description	Syntax	Example 
+New-PSSession	Creates a remote session to a computer.	New-PSSession [-ComputerName] <String> [-Credential <PSCredential>] [-ConfigurationName <String>] [-ConnectionUri <Uri>] [-Authentication <AuthenticationMechanism>] [-AllowRedirection] [-SessionOption <PSSessionOption>] [<CommonParameters>]	New-PSSession -ComputerName "localhost"
+
+
+
+10.	 
+Cmdlet Name	Description	Syntax	Example 
+Invoke-command	Runs a command on a remote computer.	Invoke-Command -ScriptBlock <ScriptBlock> [-ArgumentList <Object[]>] [-ComputerName <String[]>] [-Credential <PSCredential>] [-Session <PSSession[]>] [-FilePath <String>] [-InputObject <PSObject>] [<CommonParameters>]	Invoke-Command -ScriptBlock { Get-Date }
+
+
+
+
+
+
+
+
+
+11.	
+Cmdlet Name	Description	Syntax	Example 
+Get-CimClass	Retrieves a Common Information Model class definition, 	Get-CimClass [-Name] <String[]> [-Namespace <String>] [-ComputerName <String>] [-Credential <PSCredential>] [-Session <CimSession>] [<CommonParameters>]	Get-CimClass -Name "Win32_OperatingSystem"
+
+
+
+
+
+
+
+
+12.	 
+Cmdlet Name	Description	Syntax	Example 
+Get-WmiObject	Retrieves management information using windows management instrumentation. 	Get-WmiObject [-Class] <String> [-ComputerName <String>] [-Credential <PSCredential>] [-Namespace <String>] [-Filter <String>] [-Property <String[]>] [-DisableInteraction] [<CommonParameters>]	Get-WmiObject -Class Win32_OperatingSystem
+
+
+
+
+
+
+
+13.	
+Cmdlet Name	Description	Syntax	Example 
+Clear-host	Clears all content from console/terminal screen. 	No additional syntax	Clear-host
+
+
+
+
+
+
+
+
+
+14.	 
+Cmdlet Name	Description	Syntax	Example 
+Set-location	Changes current session location. 	Set-Location [-Path] <String> [-Credential <PSCredential>] [-Force] [-Provider <String>] [-UseTransaction] [<CommonParameters>]	Set-Location -Path "C:\Users\YourName\Documents"
+
+
+
+
+
+
+
+
+15.	 
+Cmdlet Name	Description	Syntax	Example 
+New-Variable	Used to create a new variable in the current sessions.	New-Variable -Name <String> [-Value <Object>] [-Force] [-Option <ScopedItemOptions>] [-Scope <String>] [<CommonParameters>]	New-Variable -Name "MyVar" -Value 10
+
+
+
+
+
+16.	 
+Cmdlet Name	Description	Syntax	Example 
+New-Item	Used to create a new item, like a file, directory etc.	New-Item -Path <String> [-Name <String>] [-ItemType <String>] [-Value <Object>] [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]	New-Item -Path "C:\Users\YourName" -Name "MyFolder" -ItemType Directory
+
+
+
+
+
+
+
+
+	
+
+17.	 
+Cmdlet Name	Description	Syntax	Example 
+New-NetIpAddress	Used to configure a new ip address on a network interface.	New-NetIPAddress -InterfaceIndex <Int32> -IPAddress <String> -PrefixLength <Int32> [-DefaultGateway <String>] [-AddressFamily <String>] [-PrefixOrigin <String>] [-SuffixOrigin <String>] [-InterfaceAlias <String>] [-SkipAsSource] [-PolicyStore <String>] [<CommonParameters>]	New-NetIPAddress -InterfaceIndex 12 -IPAddress 192.168.1.10 -PrefixLength 24 -DefaultGateway 192.168.1.1
+
+
+
+
+
+
+
+18.	 
+Cmdlet Name	Description	Syntax	Example 
+Install-windowsfeature	used to install server roles, role services, and features on Windows Server systems.	Install-WindowsFeature -Name <String[]> [-IncludeAllSubFeature] [-IncludeManagementTools] [-Restart] [-WhatIf] [-Confirm] [<CommonParameters>]	Install-WindowsFeature -Name Web-Server
+
+
+
+
+19.	 
+Cmdlet Name	Description	Syntax	Example 
+New-ADUser	Used to create a new user in active directory. 	New-ADUser -Name <String> -GivenName <String> -Surname <String> -SamAccountName <String> -UserPrincipalName <String> -Path <String> -AccountPassword <SecureString> [-Enabled <$true | $false>] [-Description <String>] [-Title <String>] [-Department <String>] [-Office <String>] [-EmailAddress <String>] [-OfficePhone <String>] [-MobilePhone <String>] [-City <String>] [-State <String>] [-Country <String>] [<CommonParameters>]	$Password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
+New-ADUser -Name "John Doe" -GivenName "John" -Surname "Doe" -SamAccountName "jdoe" -UserPrincipalName "jdoe@domain.com" -AccountPassword $Password -Enabled $true -Path "OU=Users,DC=domain,DC=com"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+20.	 
+Cmdlet Name	Description	Syntax	Example 
+Set-DnsClientServerAddress	used to configure the DNS server addresses for a specific network interface on a client machine	Set-DnsClientServerAddress -InterfaceIndex <Int32> -ServerAddresses <String[]> [-Validate] [-PassThru] [<CommonParameters>]	Set-DnsClientServerAddress -InterfaceIndex 12 -ServerAddresses ("8.8.8.8", "8.8.4.4")
+
+
+
+
+
+
+21.	 
+Cmdlet Name	Description	Syntax	Example 
+Add-Computer	used to join a computer to a domain or workgroup.	Add-Computer -DomainName <String> -Credential <PSCredential> [-OUPath <String>] [-Restart] [-Force] [-Options <Object>] [-WorkGroup <String>] [-NewName <String>] [<CommonParameters>]	$Credential = Get-Credential
+Add-Computer -DomainName "example.com" -Credential $Credential -Restart
+
+
+
+
+
+22.	 
+Cmdlet Name	Description	Syntax	Example 
+Write-Host	used to display messages directly to the console.	Write-Host [-Object] <Object> [-ForegroundColor <ConsoleColor>] [-BackgroundColor <ConsoleColor>] [-NoNewline] [-Separator <String>] [<CommonParameters>]	Write-Host "Hello, World!"
+
+
+
+
+23.	 
+Cmdlet Name	Description	Syntax	Example 
+Set-TimeZone	Configures the system time-zone.	Set-TimeZone -Name <String> [<CommonParameters>]	Set-TimeZone -Name "UTC"
+	
+
+
+
+24.	 
+Cmdlet Name	Description	Syntax	Example 
+Rename-Computer	Changes the name of a computer.	Rename-Computer -NewName <String> [-Force] [-PassThru] [-DomainCredential <PSCredential>] [-Restart] [-WhatIf] [-Confirm] [<CommonParameters>]	Rename-Computer -NewName "NewComputerName" -Restart
+
+25.	 
+Cmdlet Name	Description	Syntax	Example 
+New-SmbShare	Creates a new shared folder on the computer.	New-SmbShare -Name <String> -Path <String> [-Description <String>] [-FullAccess <String[]>] [-ChangeAccess <String[]>] [-ReadAccess <String[]>] [-Force] [-CimSession <CimSession[]>] [-ThrottleLimit <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]	New-SmbShare -Name "Documents" -Path "C:\Shared\Documents"
+
+
+
+
+
+
+26.	 
+Cmdlet Name	Description	Syntax	Example 
+Remove-ADUser	Deletes a user on active directory.	Remove-ADUser -Identity <ADUser> [-Confirm] [-WhatIf] [-Force] [-CimSession <CimSession[]>] [-Partition <String>] [-PassThru] [-ProxyAddress <String>] [<CommonParameters>]	Remove-ADUser -Identity "jdoe"
+
+
+27.	 
+Cmdlet Name	Description	Syntax	Example 
+Get-eventlog	Retrieves event log data from computers.	Get-EventLog [-LogName] <String> [-Newest <Int32>] [-After <DateTime>] [-Before <DateTime>] [-ComputerName <String>] [-EntryType <EventLogEntryType[]>] [-Message <String>] [-InstanceId <UInt32>] [-Source <String[]>] [-UserName <String>] [-Index <Int32>] [<CommonParameters>]	Get-EventLog -LogName "Application" -Newest 10
+
+
+
+
+
+
+
+28.	 
+Cmdlet Name	Description	Syntax	Example 
+Set-ExecutionPolicy	Changes preference for script execution policy on system.	Set-ExecutionPolicy -ExecutionPolicy <ExecutionPolicy> [-Scope <ExecutionPolicyScope>] [-Force] [-Confirm] [-WhatIf] [<CommonParameters>]	Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+
+
+
+
+
+
+29.	 
+Cmdlet Name	Description	Syntax	Example 
+Get-NetAdapter	Retrieves info on network adapters within computers.	Get-NetAdapter [-Name <String[]>] [-InterfaceAlias <String[]>] [-PhysicalAddress <String[]>] [-InterfaceDescription <String[]>] [-LinkSpeed <UInt64>] [-ComponentID <String[]>] [-CimSession <CimSession[]>] [-ThrottleLimit <Int32>] [<CommonParameters>]	Get-NetAdapter -Name "Ethernet"
+
+
+
+
+
+
+30.	 
+Cmdlet Name	Description	Syntax	Example 
+Stop-Process	Stops one or more running process on the computer	Stop-Process -Name <String[]> [-Force] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Stop-Process -Id <Int32[]> [-Force] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]	Stop-Process -Name "notepad"
+
